@@ -1,0 +1,11 @@
+#!/bin/bash
+CURRENT=`less /sys/devices/pci0000:00/0000:00:01.0/0000:01:00.0/backlight/acpi_video0/brightness` 
+
+if [  $CURRENT != 0 ]; then
+	let CURRENT=CURRENT-6
+	if [ $CURRENT -lt 0 ]; then
+		CURRENT=0
+		echo "MINIMUM REACHED!"
+	fi
+        bash -c "sudo echo $CURRENT > /sys/devices/pci0000:00/0000:00:01.0/0000:01:00.0/backlight/acpi_video0/brightness"
+fi

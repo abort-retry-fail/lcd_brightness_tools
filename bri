@@ -1,0 +1,35 @@
+#!/bin/bash
+# Intended usage requires modification to sudoers file and a global alias.
+# e.g %users  ALL=NOPASSWD: /usr/local/bin/bri
+# AND
+# alias bri='sudo /usr/local/bin/bri'
+# Without this script will break.
+
+LCDBRIGHT=`cat /sys/devices/pci0000:00/0000:00:01.0/0000:01:00.0/backlight/acpi_video0/brightness`
+
+case $LCDBRIGHT in
+[0]*) LCDBRIGHT="super fucking dark." ;;
+[1-6]*) LCDBRIGHT="dark." ;;
+[7-12]*) LCDBRIGHT="medium." ;;
+[13-18]*) LCDBRIGHT="high." ;;
+[19-24]*) LCDBRIGHT="bright as hell." ;;
+esac
+
+echo "Screen Brightness is currently set to $LCDBRIGHT"
+echo
+echo "Select new brightness level..."
+
+OPTIONS="superdark dark medium high bright_as_hell"
+
+select OPT in $OPTIONS; do 
+echo "Setting LCD brightness to $OPT." | sed s/bright_as_hell/bright\ as\ hell!/
+	case $OPT in
+		[superdark]*) OPT=0 ;;
+		[dark]*) OPT=6 ;;
+		[medium]*) OPT=12 ;;
+		[high]*) OPT=18 ;;
+		[bright_as_hell]*) OPT=24 ;;
+	esac
+bash -c "echo $OPT > /sys/devices/pci0000:00/0000:00:01.0/0000:01:00.0/backlight/acpi_video0/brightness"
+exit
+done

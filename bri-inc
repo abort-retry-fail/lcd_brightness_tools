@@ -1,0 +1,9 @@
+#!/bin/bash
+CURRENT=`cat /sys/devices/pci0000:00/0000:00:01.0/0000:01:00.0/backlight/acpi_video0/brightness`
+
+if [ ! "$CURRENT" = 25 ]; then
+	let CURRENT=CURRENT+6
+	bash -c "echo $CURRENT > /sys/devices/pci0000:00/0000:00:01.0/0000:01:00.0/backlight/acpi_video0/brightness"
+else
+	echo "MAX BRIGHTNESS!"
+fi
