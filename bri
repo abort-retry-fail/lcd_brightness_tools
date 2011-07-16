@@ -8,11 +8,11 @@
 LCDBRIGHT=`cat /sys/devices/pci0000:00/0000:00:01.0/0000:01:00.0/backlight/acpi_video0/brightness`
 
 case $LCDBRIGHT in
-[0]*) LCDBRIGHT="super fucking dark." ;;
-[1-6]*) LCDBRIGHT="dark." ;;
-[7-12]*) LCDBRIGHT="medium." ;;
-[13-18]*) LCDBRIGHT="high." ;;
-[19-24]*) LCDBRIGHT="bright as hell." ;;
+	[0]*) LCDBRIGHT="super fucking dark." ;;
+	[1-6]*) LCDBRIGHT="dark." ;;
+	[7-12]*) LCDBRIGHT="medium." ;;
+	[13-18]*) LCDBRIGHT="high." ;;
+	[19-24]*) LCDBRIGHT="bright as hell." ;;
 esac
 
 echo "Screen Brightness is currently set to $LCDBRIGHT"
@@ -22,7 +22,7 @@ echo "Select new brightness level..."
 OPTIONS="superdark dark medium high bright_as_hell"
 
 select OPT in $OPTIONS; do 
-echo "Setting LCD brightness to $OPT." | sed s/bright_as_hell/bright\ as\ hell!/
+	echo "Setting LCD brightness to $OPT." | sed s/bright_as_hell/bright\ as\ hell!/
 	case $OPT in
 		[superdark]*) OPT=0 ;;
 		[dark]*) OPT=6 ;;

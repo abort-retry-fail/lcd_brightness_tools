@@ -1,0 +1,13 @@
+#!/bin/bash
+# Intended usage requires modification to sudoers file and a global alias.
+# e.g %users  ALL=NOPASSWD: /usr/local/bin/bri
+# AND
+# alias bri='sudo /usr/local/bin/bri'
+# Without this script will break.
+
+
+bash -c "echo $1 > /sys/devices/pci0000:00/0000:00:01.0/0000:01:00.0/backlight/acpi_video0/brightness"
+
+LCDBRIGHT=`cat /sys/devices/pci0000:00/0000:00:01.0/0000:01:00.0/backlight/acpi_video0/brightness`
+
+echo "Current brightness set to $LCDBRIGHT / 24."

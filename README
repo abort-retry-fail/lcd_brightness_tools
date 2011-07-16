@@ -1,4 +1,6 @@
-Basic stuff for controlling LCD brightness via bash.
+Basic stuff for controlling LCD brightness via bash. I use these through openbox / xfce with custom keybindings.
+
+No X dependancies, uses /sys/ so YMMV.
 
 bri
 ---
@@ -11,3 +13,7 @@ Increase brightness.
 bri-dec
 -------
 Decrease brightness.
+
+set_bri
+-------
+Sets brightness from stdin. Handy for login scripts.
